@@ -1,13 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import TelaLogin from './src/pages/login/TelaLogin';
+import './gesture-handler';
+import React from 'react';
+import { StyleSheet} from 'react-native';
+
+
+import Routes from './src/routes/index.routes';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <TelaLogin/>
-    </View>
+    <NavigationContainer>
+      <Routes/>
+    </NavigationContainer>
+
+
   );
 }
 
