@@ -1,8 +1,8 @@
 import { useNavigation,NavigationProp } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions} from 'react-native';
 //import LinearGradient from 'react-native-linear-gradient'; dando erro que ainda não sei resolver
-import Seta1 from '../../../assets/IMG/seta1.png';
+//import Seta1 from '../../../assets/IMG/seta1.png';
 import Calendario from '../../../assets/IMG/Calendario.png';
 
 const { width } = Dimensions.get('window'); 
@@ -22,7 +22,7 @@ export default function PainelInicial() {
         <View style={styles.headerContent}>
           <Text style={styles.textoHeader}>Painel Inicial</Text>
           <TouchableOpacity onPress={() => navigation.navigate("TelaLogin")}>
-          <Image source={Seta1} style={styles.Seta} />
+          {/*<Image source={Seta1} style={styles.Seta} />*/}
           </TouchableOpacity>
         </View>
       </View>
@@ -56,56 +56,53 @@ const styles = StyleSheet.create({
 
   /*Header*/
   header: {
-    width: 400,
+    width: width,
     height: height * 0.1,
     backgroundColor: "#fff",
     elevation: 30,
-    bottom: 318,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    borderColor: 'black',
+    borderWidth: 1,
+    
   },
 
   textoHeader: {
     fontSize: 24,
     color: '#0073e6',
-    marginTop: 10,
+    marginTop: 30,
     textAlign: 'center',
-    fontFamily: 'Nunito-VariableFont_wght',
-    right: 50,
+    fontFamily: 'Nunito-VariableFont_wght'
   },
 
-  Seta: { /*Avaliar necessidade*/
-    width: 30,
-    height: 30,
-    marginTop: 13,
-    right: 30,
-  },
+  //Seta: { /*Avaliar necessidade*/
+    //width: 30,
+    //height: 30,
+    //marginTop: 30,
+    //right: 30,
+  //},
 
   headerContent: {
-    flexDirection: 'row-reverse',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 160,
-    marginLeft: 30,
+    
   },
 
-  /*Sombra para o Header*/
-  rectanglesContainer: {
-    bottom: 318,
-    width: width,
-  },
-  
-  retangulo1: {
-    height: 8,
-    width: '100%',
-    alignSelf: 'center',
-  },
+  /*Sombra para o Header*/ //Ta quebrado o Linear Gradient
+  //rectanglesContainer: {
+    //bottom: 318,
+    //width: width,
+  //},
 
   /*Caixa Materia 1*/
   caixaMateria1: {
     backgroundColor: '#fff',
-    height: 80, 
-    width: 300,
+    height: height * 0.1, 
+    width: width * 0.75,
     borderRadius: 10,
-    marginTop: 20,
+    bottom: width * 0.65,
     overflow: 'hidden',
     borderColor: 'black',
     borderWidth: 1,
@@ -129,19 +126,5 @@ const styles = StyleSheet.create({
     bottom: 45,
     left: 5,
   },
-
-  /*Sombra para Caixa Materia 1*/ /*Avaliar*/
-  rectanglesContainer2: {
-    bottom: 273,
-    width: 280,
-  },
-
-  retangulo2: {
-    height: 8,
-    width: '100%',
-    alignSelf: 'center',
-    borderRadius: 10,
-  },
-
 
 });

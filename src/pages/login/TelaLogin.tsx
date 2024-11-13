@@ -1,6 +1,6 @@
 import { useNavigation,NavigationProp } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Dimensions, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Dimensions, TouchableWithoutFeedback, Keyboard, Alert, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RecorteLogo2 from '../../../assets/IMG/RecorteLogo2.png';
 import LogoOk from '../../../assets/IMG/logoOk-removebg-preview.png';
@@ -17,46 +17,58 @@ export default function TelaLogin() {
     const [CPF, setCPF] = useState('');
     const [Senha, setSenha] = useState('');
 
+    const [isLoading, setIsLoading] = useState(false);
 
-    // Função para login, comunicando com o backend e armazenando o token JWT
-    async function getLogin() {
-        try {
-            if (!CPF || !Senha) {
-                return Alert.alert('Atenção!', 'Informe os campos obrigatórios!');
-            }
 
-            navigation.navigate('PainelInicial')
-
-      // Fazendo a requisição ao backend para autenticação
-      const response = await fetch('http://192.168.1.69:8080/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          cpf: CPF,
-          senha: Senha,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        await AsyncStorage.setItem('token', data.token);
-
-        Alert.alert('Sucesso', 'Login realizado com sucesso');
-
-        navigation.navigate('PainelInicial');
-        
-      } else {
-        const errorMessage = await response.text();
-        Alert.alert('Erro', errorMessage || 'Erro desconhecido. Tente novamente.');
-      }
-      
-    } catch (error) {
-      Alert.alert('Erro', 'Não foi possível conectar ao servidor.');
-      console.log(error);
+// Função para login, comunicando com o backend e armazenando o token JWT
+async function getLogin() {
+  try {
+    if (!CPF || !Senha) {
+      return Alert.alert('Atenção!', 'Informe os campos obrigatórios!');
     }
+
+    setIsLoading(true);
+
+    const response = await fetch('http://192.168.1.70:8080/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        cpf: CPF,
+        senha: Senha,
+      }),
+    });
+
+    setIsLoading(false);
+
+    if (response.ok) {
+      const data = await response.json();
+      await AsyncStorage.setItem('token', data.token);
+
+      Alert.alert('Sucesso', 'Login realizado com sucesso');
+      navigation.navigate('PainelInicial');
+      
+    } //else if (response.status === 401) { POR ALGUM MOTIVO O BACK NÃO ESTA RETORNANDO ERRO 401 QUANDO ERRO A SENHA ELE APARECE ESSA MENSAGEM "Ocorreu um erro inesperado. Tente novamente." OU SEJA O ELSE DE BAIXO
+      //Alert.alert('Erro', 'CPF ou senha incorretos. Tente novamente.');//} 
+      
+      //else { 
+      //const errorMessage = await response.text();
+      //Alert.alert('Erro', 'Ocorreu um erro inesperado. Tente novamente.');
+      //console.log('Erro do backend:', errorMessage); // Log do erro para fins de debug
+    //} POR ENQUANDO VOU UTILIZAR ESSE ELSE ABAIXO COM A MENSAGEM DE cpf OU SENHA ERRADOS AINDA QUE NÃO SEJA ERRO 401 PARA CONTINUIDADE DO PROJETO
+
+    else {
+      const errorMessage = await response.text();
+      Alert.alert('Erro', 'CPF ou senha incorretos. Tente novamente.');
+      
+    }
+    
+  } catch (error) {
+    Alert.alert('Erro', 'Não foi possível conectar ao servidor. Verifique sua conexão.');
+    console.log('Erro de conexão:', error);
   }
+}
 
   const [isFocused, setIsFocused] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
@@ -125,6 +137,16 @@ export default function TelaLogin() {
             <Text style={[styles.loginButtonText, isPressed && styles.loginButtonTextPressed]}>Login</Text>
           </TouchableOpacity>
         </View>
+        
+
+        {/* Exibe mensagem de carregamento */}
+        {isLoading && (
+        <View style={styles.loadingContainer}>
+            <ActivityIndicator  size="large" color="#0073e6" style={{ marginTop: 20 }} />
+            <Text style={styles.loadingText}>Tentando entrar em contato com o servidor...</Text>
+        </View>
+        )}
+
       </View>
     </TouchableWithoutFeedback>
   );
@@ -290,4 +312,26 @@ const styles = StyleSheet.create({
   loginButtonTextPressed: {
     color: '#0073e6',
   },
+
+  // Estilos da mensagem do carregamento tentando encontrar
+  loadingContainer: {
+    position: 'absolute',
+    top: '50%',
+    left: '26%',
+    transform: [{ translateX: -75 }, { translateY: -40 }],
+    alignItems: 'center',
+    backgroundColor:"#fff",
+    borderRadius:10,
+    borderWidth: 2,
+    borderColor:"#000",
+  },
+
+  loadingText: {
+    marginTop: 10,
+    marginBottom: 10,
+    padding:10,
+    color: '#0073e6',
+    fontSize: 16,
+  },
+  
 });
