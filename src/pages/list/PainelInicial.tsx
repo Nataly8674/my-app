@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   /*Header*/
   header: {
     width: width,
-    height: height * 0.1,
+    height: height * 0.11,
     backgroundColor: "#fff",
     elevation: 30,
     position: 'absolute',
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   textoHeader: {
     fontSize: 24,
     color: '#0073e6',
-    marginTop: 30,
+    marginTop: 40,
     textAlign: 'center',
     fontFamily: 'Nunito-VariableFont_wght'
   },
@@ -85,8 +85,16 @@ const styles = StyleSheet.create({
   //},
 
   headerContent: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: width,
+    height: height * 0.11,
+    backgroundColor: "#fff",
+    elevation: 30,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    borderColor: 'black',
+    borderWidth: 1,
     
   },
 

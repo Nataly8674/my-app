@@ -4,6 +4,7 @@ import Seta1 from '../../../assets/IMG/seta1.png';
 import { useNavigation,NavigationProp } from '@react-navigation/native';
 
 
+const { width, height } = Dimensions.get('window');
 
 type PresencaType = {
   [key: string]: 'P' | 'F' | null;
@@ -41,11 +42,11 @@ const AttendanceScreen = () => {
             body: JSON.stringify({
              alunos: [
                 { id: 1, presenca: presenca.aluno1 },
-             { id: 2, presenca: presenca.aluno2 },
-             { id: 3, presenca: presenca.aluno3 },
-              { id: 4, presenca: presenca.aluno4 },
+                { id: 2, presenca: presenca.aluno2 },
+                { id: 3, presenca: presenca.aluno3 },
+                { id: 4, presenca: presenca.aluno4 },
              ],
-          // Adicione aqui outros dados necessários para a chamada, como turma e horário
+          
         }),
         });
 
@@ -129,19 +130,25 @@ const styles = StyleSheet.create({
 
   /*Header*/
   header: {
-    width: '100%',
-    height: 55,
+    width: width,
+    height: height * 0.11,
     backgroundColor: "#fff",
     elevation: 30,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    borderColor: 'black',
+    borderWidth: 1,
+    
   },
 
   textoHeader: {
     fontSize: 24,
     color: '#0073e6',
-    marginTop: 10,
+    marginTop: 40,
     textAlign: 'center',
-    fontFamily: 'Nunito-VariableFont_wght',
-    right: 25,
+    fontFamily: 'Nunito-VariableFont_wght'
   },
 
   seta: {
@@ -152,11 +159,17 @@ const styles = StyleSheet.create({
   },
 
   headerContent: {
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 110,
-    marginLeft: 30,
+    width: width,
+    height: height * 0.11,
+    backgroundColor: "#fff",
+    elevation: 30,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    borderColor: 'black',
+    borderWidth: 1,
+    
   },
 
   data: {
@@ -167,16 +180,16 @@ const styles = StyleSheet.create({
   },
 
   containerPresenca: {
+    width:width * 0.9,
+    height: height * 0.1,
     flex: 1,
     padding: 20,
     borderRadius: 10,
     backgroundColor: '#ffffff',
     elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    justifyContent: 'flex-end',
+    marginLeft:20,
+    marginBottom:20,
+    marginTop:70,
   },
 
   materia: {

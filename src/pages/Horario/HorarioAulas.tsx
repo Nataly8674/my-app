@@ -213,19 +213,25 @@ const styles = StyleSheet.create({
 
   /*Header*/
   header: {
-    width: '100%',
-    height: 55,
+    width: width,
+    height: height * 0.11,
     backgroundColor: "#fff",
     elevation: 30,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    borderColor: 'black',
+    borderWidth: 1,
+    
   },
 
   textoHeader: {
     fontSize: 24,
     color: '#0073e6',
-    marginTop: 10,
+    marginTop: 40,
     textAlign: 'center',
-    fontFamily: 'Nunito-VariableFont_wght',
-    right: 25,
+    fontFamily: 'Nunito-VariableFont_wght'
   },
 
   seta: {
@@ -236,11 +242,17 @@ const styles = StyleSheet.create({
   },
 
   headerContent: {
-    flexDirection: 'row-reverse',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 110,
-    marginLeft: 30,
+    width: width,
+    height: height * 0.11,
+    backgroundColor: "#fff",
+    elevation: 30,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    borderColor: 'black',
+    borderWidth: 1,
+    
   },
 
   /*Sombra para o Header*/
@@ -255,7 +267,7 @@ const styles = StyleSheet.create({
   },
 
   Main: {
-    marginTop: 20,
+    marginTop: 60,
     paddingHorizontal: 20,
     paddingLeft: 50,
     right: 5,

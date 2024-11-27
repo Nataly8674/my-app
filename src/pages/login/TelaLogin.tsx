@@ -280,8 +280,8 @@ const styles = StyleSheet.create({
   },
 
   ondaImage: {
-    width: width * 1.0,
-    height: height * 0.25,
+    width: width * 1.1,
+    height: height * 0.27,
     top: height * 0.22,
     right: 40,
   },
