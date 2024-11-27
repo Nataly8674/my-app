@@ -1,17 +1,29 @@
-import axios from 'axios';
+const API_URL = 'https://seduc-professores-alunos-a611446c60df.herokuapp.com'; // Certifique-se de que está correto
 
-// URL do back-end hospedado no Heroku
-const API_URL = 'https://seduc-professores-alunos-a611446c60df.herokuapp.com';
-
-export const login = async (cpf, password) => {
+export const login = async (cpf, senha) => {
     try {
-        const response = await axios.post(`${API_URL}/auth/login`, {
-            cpf: cpf,
-            password: password
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                cpf: cpf,
+                senha: senha, // "senha" é o campo correto, conforme você testou
+            }),
         });
-        return response.data;
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            console.log("Login bem-sucedido", data);
+            return data;
+        } else {
+            console.error("Erro no login:", data);
+            throw new Error(data.message || "Erro desconhecido");
+        }
     } catch (error) {
-        console.error("Erro ao fazer login", error);
-        throw error; // Lança o erro para ser tratado no componente
+        console.error("Erro de conexão:", error);
+        throw error;
     }
 };
