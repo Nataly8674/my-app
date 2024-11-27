@@ -1,13 +1,3 @@
-    //Alocação se necessario de icons
-
-    //coloque no arquivo que vc quer importar 
-    //import {MaterialIcons} from '@expo/vector-icons'
-    //<MaterialIcons
-    //   name=''
-    //   size=''
-    //   color=''
-    // />
-
     export const themas = {
         colors:{
             primary:'#878af6',
